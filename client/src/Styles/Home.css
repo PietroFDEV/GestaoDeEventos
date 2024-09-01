@@ -1,0 +1,125 @@
+.home-banner{
+    width: 100%;
+    padding-top: 60px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.home-categories{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #64379b;
+    font-family: 'Lato Bold';
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+.categories-list{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.category{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+    color: white;
+}
+
+.category-circle{
+    border: 0px solid black;
+    background-color: white;
+    border-radius: 250px;
+    padding: 25px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin-bottom: 10px;
+    transition: 0.2s;
+}
+
+.category-svg{
+    transition: 0.2s;
+    filter: invert(22%) sepia(74%) saturate(1504%) hue-rotate(245deg) brightness(92%) contrast(91%);
+}
+
+.category-title{
+    color: white;
+    transition: 0.2s;
+    font-family: 'Lato Bold';
+    font-size: 22px;
+}
+
+.category:hover .category-circle{
+    background-color: #64379b;
+}
+
+.category:hover .category-svg{
+    filter: invert(1) brightness(2);
+}
+
+.category:hover .category-title{
+    color: #64379b;
+}
+
+.category:hover{
+    color: #64379b;
+}
+
+.click-here-div{
+    display: flex;
+    color: #64379b;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    margin-bottom: 70px;
+}
+
+.click-here-button{
+    outline: none;
+    border: 0px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Lato Bold';
+    font-size: 20px;
+    color: white;
+    background-color: #64379b;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.click-here-button:hover{
+    transform:scale(1.1);
+}
+
+/* ------ GRID ------ */
+/* ------ GRID ------ */
+
+.next-events{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #64379b;
+    font-size: 20px;
+    margin-bottom: 50px;
+}
+
+.events-home-grid{
+    display: inline-grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
+    row-gap: 30px;
+    column-gap: 30px;
+    margin-top: 10px;
+}
+
+.home-event{
+    background-color: gray;
+    width: 300px;
+    height: 300px;
+}

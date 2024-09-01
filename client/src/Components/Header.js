@@ -7,7 +7,9 @@ const Header = ({ logged }) => {
         return (
             <div className='header'>
                 <div className='header-logo'>
-                    <img src='Logo_full.png' height='50px'></img>
+                    <a href='/home'>
+                        <img src='Logo_full.png' height='50px'></img>
+                    </a>  
                 </div>
                 
                 <a href='/eventos'>
@@ -38,7 +40,9 @@ const Header = ({ logged }) => {
     return (
         <div className='header'>
             <div className='header-logo'>
-                <img src='Logo_full.png' height='50px'></img>
+                <a href='/home'>
+                    <img src='Logo_full.png' height='50px'></img>
+                </a>  
             </div>
             
             <a href='/eventos'>
