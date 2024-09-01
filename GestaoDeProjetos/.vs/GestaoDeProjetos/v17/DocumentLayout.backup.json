@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Gamer\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{63DD8A9F-EE15-4BE5-925B-07E9C0E41665}|GestaoDeProjetos\\GestaoDeProjetos.csproj|c:\\users\\gamer\\documents\\github\\gestaodeeventos\\gestaodeprojetos\\gestaodeprojetos\\gestaodeprojetos.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{63DD8A9F-EE15-4BE5-925B-07E9C0E41665}|GestaoDeProjetos\\GestaoDeProjetos.csproj|solutionrelative:gestaodeprojetos\\gestaodeprojetos.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{63DD8A9F-EE15-4BE5-925B-07E9C0E41665}|GestaoDeProjetos\\GestaoDeProjetos.csproj|c:\\users\\gamer\\documents\\github\\gestaodeeventos\\gestaodeprojetos\\gestaodeprojetos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{63DD8A9F-EE15-4BE5-925B-07E9C0E41665}|GestaoDeProjetos\\GestaoDeProjetos.csproj|solutionrelative:gestaodeprojetos\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -21,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{63DD8A9F-EE15-4BE5-925B-07E9C0E41665}|GestaoDeProjetos\\GestaoDeProjetos.csproj|c:\\users\\gamer\\documents\\github\\gestaodeeventos\\gestaodeprojetos\\gestaodeprojetos\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{63DD8A9F-EE15-4BE5-925B-07E9C0E41665}|GestaoDeProjetos\\GestaoDeProjetos.csproj|solutionrelative:gestaodeprojetos\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{63DD8A9F-EE15-4BE5-925B-07E9C0E41665}|GestaoDeProjetos\\GestaoDeProjetos.csproj|c:\\users\\gamer\\documents\\github\\gestaodeeventos\\gestaodeprojetos\\gestaodeprojetos\\gestaodeprojetos.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{63DD8A9F-EE15-4BE5-925B-07E9C0E41665}|GestaoDeProjetos\\GestaoDeProjetos.csproj|solutionrelative:gestaodeprojetos\\gestaodeprojetos.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,11 +34,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Gamer\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\GestaoDeProjetos\\appsettings.json",
               "RelativeDocumentMoniker": "GestaoDeProjetos\\appsettings.json",
@@ -50,19 +54,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "GestaoDeProjetos.http",
               "DocumentMoniker": "C:\\Users\\Gamer\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\GestaoDeProjetos\\GestaoDeProjetos.http",
               "RelativeDocumentMoniker": "GestaoDeProjetos\\GestaoDeProjetos.http",
               "ToolTip": "C:\\Users\\Gamer\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\GestaoDeProjetos\\GestaoDeProjetos.http",
               "RelativeToolTip": "GestaoDeProjetos\\GestaoDeProjetos.http",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAiAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-09-01T02:18:57.281Z"
+              "WhenOpened": "2024-09-01T02:18:57.281Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Gamer\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\GestaoDeProjetos\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "GestaoDeProjetos\\Properties\\launchSettings.json",
@@ -74,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "EventosController.cs",
               "DocumentMoniker": "C:\\Users\\Gamer\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\GestaoDeProjetos\\Controllers\\EventosController.cs",
               "RelativeDocumentMoniker": "GestaoDeProjetos\\Controllers\\EventosController.cs",
@@ -86,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Evento.cs",
               "DocumentMoniker": "C:\\Users\\Gamer\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\GestaoDeProjetos\\Evento.cs",
               "RelativeDocumentMoniker": "GestaoDeProjetos\\Evento.cs",
@@ -98,7 +103,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Gamer\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\GestaoDeProjetos\\Program.cs",
               "RelativeDocumentMoniker": "GestaoDeProjetos\\Program.cs",
@@ -108,10 +113,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-01T02:18:57.295Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }
