@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\client",
+    "\\GestaoDeProjetos",
+    "\\GestaoDeProjetos\\GestaoDeProjetos"
   ],
+  "SelectedNode": "\\GestaoDeProjetos\\GestaoDeProjetos\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
