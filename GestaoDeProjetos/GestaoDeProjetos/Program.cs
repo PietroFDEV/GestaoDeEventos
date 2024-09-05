@@ -3,8 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<GestaoDbContext>(options =>
+builder.Services.AddDbContext<GestaoprojetosContext>(options =>
     options.UseMySQL(builder.Configuration.GetConnectionString("DbConnection")));
+
 
 builder.Services.AddControllers();
 
