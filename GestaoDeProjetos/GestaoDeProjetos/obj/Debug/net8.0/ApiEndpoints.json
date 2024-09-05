@@ -27,6 +27,37 @@
   },
   {
     "ContainingType": "GestaoDeProjetos.Controllers.UsuarioController",
+    "Method": "Authenticate",
+    "RelativePath": "api/Usuario/Authenticate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "GestaoDeProjetos.Models.Usuario",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "GestaoDeProjetos.Controllers.UsuarioController",
     "Method": "GetUsuario",
     "RelativePath": "api/Usuario/{id}",
     "HttpMethod": "GET",

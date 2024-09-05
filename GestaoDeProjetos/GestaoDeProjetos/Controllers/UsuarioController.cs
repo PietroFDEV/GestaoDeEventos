@@ -31,6 +31,21 @@ namespace GestaoDeProjetos.Controllers
             return usuario;
         }
 
+        //GET: api/Usuario/Authenticate/{email}/{password}
+        [HttpGet("Authenticate")]
+        public async Task<ActionResult<Usuario>> Authenticate(string email, string password)
+        {
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Email == email && u.Senha == password);
+
+            if (usuario == null)
+            {
+                return NotFound("Usuário não encontrado");
+            }
+
+            return usuario;
+        }
+
         // POST: api/Usuario
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
