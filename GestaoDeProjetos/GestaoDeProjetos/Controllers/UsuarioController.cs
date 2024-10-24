@@ -17,52 +17,49 @@ namespace GestaoDeProjetos.Controllers
             _context = context;
         }
 
-        // GET: api/Usuario/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario>> GetUsuario(int id)
+        public async Task<ActionResult<Usuario>> GetUser(int id)
         {
-            var usuario = await _context.Usuarios.FindAsync(id);
+            var user = await _context.Usuarios.FindAsync(id);
 
-            if (usuario == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return usuario;
+            return user;
         }
 
-        //GET: api/Usuario/Authenticate/{email}/{password}
         [HttpGet("Authenticate")]
-        public async Task<ActionResult<Usuario>> Authenticate(string email, string password)
+        public async Task<ActionResult<bool>> Authenticate(string email, string password)
         {
-            var usuario = await _context.Usuarios
+            var user = await _context.Usuarios
                 .FirstOrDefaultAsync(u => u.Email == email && u.Senha == password);
 
-            if (usuario == null)
+            if (user == null)
             {
-                return NotFound("Usuário não encontrado");
+                return false;
             }
 
-            return usuario;
+            return true;
         }
 
-        // POST: api/Usuario
-        [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
+        [HttpPost("CreateUser")]
+        public async Task<ActionResult<Usuario>> PostUser(Usuario user)
         {
-            usuario.DataCriacao = DateTime.Now;
+            user.DataCriacao = DateTime.Now;
 
-            if (string.IsNullOrWhiteSpace(usuario.Nome) ||
-                string.IsNullOrWhiteSpace(usuario.Email) ||
-                string.IsNullOrWhiteSpace(usuario.Senha))
+            if (string.IsNullOrWhiteSpace(user.Nome) ||
+                string.IsNullOrWhiteSpace(user.Email) ||
+                string.IsNullOrWhiteSpace(user.Senha))
             {
                 return BadRequest("Nome, Email, and Senha são necessárias.");
             }
 
-            _context.Usuarios.Add(usuario);
+            _context.Usuarios.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUsuario), new { id = usuario.Id }, usuario);
+            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
     }
 }
