@@ -1,8 +1,33 @@
+import { useState, useEffect, React } from "react"
 import Header from '../Components/Header.js'
 import Footer from '../Components/Footer.js'
 import '../Styles/Home.css'
+import { api } from '../api.js'
 
 function Home(){
+
+    useEffect(() => {
+        // api.get('/api/usuario/id/1')
+        // .then(response => {
+        //     console.log(response.data)
+        // })
+        // .catch(error => {
+        //     console.error('Error fetching user data:', error)
+        // })
+        CreateUser()
+    }, [])
+
+    async function CreateUser() {
+        const user = await api.post('/Usuario/createUser', {
+            Nome: 'Lu',
+            Email: 'lu@gmail.com',
+            Senha: '12345'
+        })
+
+        console.log(user)
+    }
+
+
     return(
         <div className='home-page'>
             <Header logged={false}></Header>
