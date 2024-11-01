@@ -55,7 +55,9 @@ namespace GestaoDeProjetos.Controllers
                 string.IsNullOrWhiteSpace(ev.Local) ||
                 string.IsNullOrWhiteSpace(ev.TipoEvento) ||
                 ev.Capacidade is null or <= 0 ||
-                ev.UsuarioId is null or <= 0)
+                ev.UsuarioId is null or <= 0 ||
+                string.IsNullOrWhiteSpace(ev.endereco) ||
+                ev.categoria_id is null or <= 0)
             {
                 return BadRequest("Todos os campos obrigatórios devem ser preenchidos com valores válidos.");
             }

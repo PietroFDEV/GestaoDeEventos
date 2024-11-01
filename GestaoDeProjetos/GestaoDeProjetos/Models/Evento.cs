@@ -25,13 +25,14 @@ public partial class Evento
 
     public DateTime? DataCriacao { get; set; }
 
-    public virtual ICollection<Avaliaco> Avaliacos { get; set; } = new List<Avaliaco>();
+    public string? endereco { get; set; }
 
-    public virtual ICollection<Localidade> Localidades { get; set; } = new List<Localidade>();
+    public int? categoria_id { get; set; }
+
+    public virtual ICollection<Avaliaco> Avaliacos { get; set; } = new List<Avaliaco>();
 
     public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 
     public virtual Usuario? Usuario { get; set; }
 
-    public virtual ICollection<Categoria> Categoria { get; set; } = new List<Categoria>();
 }

@@ -17,11 +17,7 @@ public partial class GestaoprojetosContext : DbContext
 
     public virtual DbSet<Avaliaco> Avaliacoes { get; set; }
 
-    public virtual DbSet<Categoria> Categorias { get; set; }
-
     public virtual DbSet<Evento> Eventos { get; set; }
-
-    public virtual DbSet<Localidade> Localidades { get; set; }
 
     public virtual DbSet<Ticket> Tickets { get; set; }
 
@@ -58,18 +54,6 @@ public partial class GestaoprojetosContext : DbContext
             entity.HasOne(d => d.Usuario).WithMany(p => p.Avaliacos)
                 .HasForeignKey(d => d.UsuarioId)
                 .HasConstraintName("avaliacoes_ibfk_2");
-        });
-
-        modelBuilder.Entity<Categoria>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("categorias");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Nome)
-                .HasMaxLength(100)
-                .HasColumnName("nome");
         });
 
         modelBuilder.Entity<Evento>(entity =>
@@ -110,53 +94,6 @@ public partial class GestaoprojetosContext : DbContext
                 .HasForeignKey(d => d.UsuarioId)
                 .HasConstraintName("eventos_ibfk_1");
 
-            entity.HasMany(d => d.Categoria).WithMany(p => p.Eventos)
-                .UsingEntity<Dictionary<string, object>>(
-                    "EventosCategoria",
-                    r => r.HasOne<Categoria>().WithMany()
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("eventos_categorias_ibfk_2"),
-                    l => l.HasOne<Evento>().WithMany()
-                        .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("eventos_categorias_ibfk_1"),
-                    j =>
-                    {
-                        j.HasKey("EventoId", "CategoriaId").HasName("PRIMARY");
-                        j.ToTable("eventos_categorias");
-                        j.HasIndex(new[] { "CategoriaId" }, "categoria_id");
-                        j.IndexerProperty<int>("EventoId").HasColumnName("evento_id");
-                        j.IndexerProperty<int>("CategoriaId").HasColumnName("categoria_id");
-                    });
-        });
-
-        modelBuilder.Entity<Localidade>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PRIMARY");
-
-            entity.ToTable("localidades");
-
-            entity.HasIndex(e => e.EventoId, "evento_id");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Cep)
-                .HasMaxLength(20)
-                .HasColumnName("cep");
-            entity.Property(e => e.Cidade)
-                .HasMaxLength(100)
-                .HasColumnName("cidade");
-            entity.Property(e => e.Endereco)
-                .HasMaxLength(255)
-                .HasColumnName("endereco");
-            entity.Property(e => e.Estado)
-                .HasMaxLength(100)
-                .HasColumnName("estado");
-            entity.Property(e => e.EventoId).HasColumnName("evento_id");
-
-            entity.HasOne(d => d.Evento).WithMany(p => p.Localidades)
-                .HasForeignKey(d => d.EventoId)
-                .HasConstraintName("localidades_ibfk_1");
         });
 
         modelBuilder.Entity<Ticket>(entity =>
