@@ -14,18 +14,7 @@ function Home(){
         // .catch(error => {
         //     console.error('Error fetching user data:', error)
         // })
-        CreateUser()
     }, [])
-
-    async function CreateUser() {
-        const user = await api.post('/Usuario/createUser', {
-            Nome: 'Lu',
-            Email: 'lu@gmail.com',
-            Senha: '12345'
-        })
-
-        console.log(user)
-    }
 
 
     return(

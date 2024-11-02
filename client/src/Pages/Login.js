@@ -1,15 +1,16 @@
 import { useState, useEffect, useContext } from "react"
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"
+import { api } from "../api"
 import '../Styles/login.css'
+import { AuthContext } from "../Contexts/auth"
 
 function Login(){
+    const { authenticated, login } = useContext(AuthContext)
     const [registerUserState, setRegisterUserState] = useState({ nomeUsuario: '', emailUsuario: '', password: '' })
-    const navigate = useNavigate()
-
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const authenticated = false
+    const navigate = useNavigate()
 
     useEffect(() => {
         if(authenticated === true){
@@ -22,43 +23,27 @@ function Login(){
     const page = query.get('page')
 
     const handleSubmit = (e) => {
-        // e.preventDefault()
-        // //console.log("submit", { email, password })
-        // login(email, password)
-        console.log('handlesubmit')
+        e.preventDefault()
+        if(email !== "" && password !== ""){
+            login(email, password)
+        } else {
+            window.alert("Preencha todos os campos e tente novamente.")
+        }
     }
 
-    const registerUser = async(e) => {
-        console.log('register user')
-        // if (registerUserState.nomeUsuario !== '' && registerUserState.emailUsuario !== '' && registerUserState.password !== '') {
-        //     // insert no mysql
-        //     fetch('http://localhost:5000/registerUser', {
-        //         method: "POST",
-        //         headers: {
-        //             'Content-type': 'application/json'
-        //         },
-        //         body: JSON.stringify(registerUserState)
-        //     })
-        //         .then((response) => response.json())
-        //         .then((result) => {
-        //             if(result[0].msg === false){
-        //                 if(result[0].erro.code === 'ER_DUP_ENTRY'){
-        //                     window.alert('Já existe um usuário com esse e-mail cadastrado, tente outro.')
-        //                 }
-        //                 else {
-        //                     window.alert('Ocorreu um erro, usuário não cadastrado.')
-        //                     navigate(0)
-        //                 }
-        //             }
-        //             else {
-        //                 window.alert('Usuário cadastrado! Entre com sua conta.')
-        //                 navigate('/login')
-        //             }
-        //         })
-        // }
-        // else {
-        //     window.alert('Preencha todos os campos!')
-        // }
+    async function registerUser() {
+        if (registerUserState.nomeUsuario !== '' && registerUserState.emailUsuario !== '' && registerUserState.password !== '') {
+            const user = await api.post('/Usuario/createUser', {
+                Nome: registerUserState.nomeUsuario,
+                Email: registerUserState.emailUsuario,
+                Senha: registerUserState.password
+            })
+
+            console.log(user.data)
+        }
+        else {
+            window.alert('Preencha todos os campos!')
+        }
     }
 
     if (page === 'cadastro') return (
@@ -112,7 +97,7 @@ function Login(){
                             
                         </div>
                         <div className="profile-login-card-buttons">
-                            <button className="profile-login-buttons" type="submit">Entrar</button>
+                            <button className="profile-login-buttons" type="submit" onClick={() => handleSubmit}>Entrar</button>
                             <a href="/login?page=cadastro">
                                 <button type="button" className="profile-login-buttons" style={{ backgroundColor: 'white', color: '#89259d' }}>Cadastrar</button>
                             </a>

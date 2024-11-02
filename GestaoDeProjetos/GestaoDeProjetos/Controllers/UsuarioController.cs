@@ -38,10 +38,10 @@ namespace GestaoDeProjetos.Controllers
 
             if (user == null)
             {
-                return false;
+                return NoContent();
             }
 
-            return true;
+            return Ok(user);
         }
 
         [HttpPost("CreateUser")]

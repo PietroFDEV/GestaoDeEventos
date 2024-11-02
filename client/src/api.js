@@ -9,3 +9,7 @@ export const api = axios.create({
         'Content-Type': 'application/json',
     }
 })
+
+export const createSession = async (email, password) => {
+    return api.get(`/Usuario/Authenticate?email=${email}&password=${password}`)
+}

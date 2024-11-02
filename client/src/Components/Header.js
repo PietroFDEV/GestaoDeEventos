@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import '../Styles/Header.css'
 
-const Header = ({ logged }) => {
+const Header = () => {
+    const [user, setUser] = useState(undefined)
 
-    if(!logged){
+    useEffect(() => {
+        let user = JSON.parse(localStorage.getItem('user'))
+        setUser(user)
+    })
+
+    if(!user){
         return (
             <div className='header'>
                 <div className='header-logo'>
@@ -73,7 +79,7 @@ const Header = ({ logged }) => {
                 <div className='h-login h-background'>
                     <div className='login-div'>
                         <img src='person-icon.svg' className='fill-white' width='25px'></img>
-                        <p style={{ marginLeft: '5px' }}>Lucas Martins</p>
+                        <p style={{ marginLeft: '5px' }}>{user.nome}</p>
                     </div>
                 </div>
             </a>
