@@ -7,7 +7,7 @@ const Header = () => {
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem('user'))
         setUser(user)
-    })
+    }, [])
 
     if(!user){
         return (

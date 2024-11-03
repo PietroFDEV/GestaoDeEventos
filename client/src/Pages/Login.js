@@ -16,7 +16,7 @@ function Login(){
         if(authenticated === true){
             navigate("/perfil")
         }
-    })
+    }, [])
 
     const useQuery = () => new URLSearchParams(useLocation().search)
     const query = useQuery()

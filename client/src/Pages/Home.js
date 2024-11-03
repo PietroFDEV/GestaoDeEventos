@@ -3,6 +3,8 @@ import Header from '../Components/Header.js'
 import Footer from '../Components/Footer.js'
 import '../Styles/Home.css'
 import { api } from '../api.js'
+import { categories } from "../Contexts/categories.js"
+import { FaIcons } from "react-icons/fa"
 
 function Home(){
 
@@ -26,86 +28,18 @@ function Home(){
             <div className='home-categories'>
                 <h2>Encontre eventos sla sla sla</h2>
                 <div className='categories-list'>
-                    <a href='#'>
-                        <div className='category'>
-                            <div className='category-circle'>
-                                <img src='party-icon.svg' width='50px' className='category-svg'></img>
+                    {categories.map((category, i) => (
+                        <a href='#' key={i}>
+                            <div className='category'>
+                                <div className='category-circle'>
+                                    {category.icon}
+                                </div>
+                                <div className='category-title'>
+                                    <p>{category.name}</p>
+                                </div>
                             </div>
-                            <div className='category-title'>
-                                <p>Categoria 1</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href='#'>
-                        <div className='category'>
-                            <div className='category-circle'>
-                                <img src='party-icon.svg' width='50px' className='category-svg'></img>
-                            </div>
-                            <div className='category-title'>
-                                <p>Categoria 1</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href='#'>
-                        <div className='category'>
-                            <div className='category-circle'>
-                                <img src='party-icon.svg' width='50px' className='category-svg'></img>
-                            </div>
-                            <div className='category-title'>
-                                <p>Categoria 1</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href='#'>
-                        <div className='category'>
-                            <div className='category-circle'>
-                                <img src='party-icon.svg' width='50px' className='category-svg'></img>
-                            </div>
-                            <div className='category-title'>
-                                <p>Categoria 1</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href='#'>
-                        <div className='category'>
-                            <div className='category-circle'>
-                                <img src='party-icon.svg' width='50px' className='category-svg'></img>
-                            </div>
-                            <div className='category-title'>
-                                <p>Categoria 1</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href='#'>
-                        <div className='category'>
-                            <div className='category-circle'>
-                                <img src='party-icon.svg' width='50px' className='category-svg'></img>
-                            </div>
-                            <div className='category-title'>
-                                <p>Categoria 1</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href='#'>
-                        <div className='category'>
-                            <div className='category-circle'>
-                                <img src='party-icon.svg' width='50px' className='category-svg'></img>
-                            </div>
-                            <div className='category-title'>
-                                <p>Categoria 1</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href='#'>
-                        <div className='category'>
-                            <div className='category-circle'>
-                                <img src='party-icon.svg' width='50px' className='category-svg'></img>
-                            </div>
-                            <div className='category-title'>
-                                <p>Categoria 1</p>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    ))}
                 </div>
             </div>
             <div className='next-events'>

@@ -1,0 +1,81 @@
+.account-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 100px;
+}
+
+#account-initials{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #64379b;
+    width: 150px;
+    height: 150px;
+    border-radius: 200px;
+    font-size: 50px;
+    font-family: 'Lato';
+    font-weight: bold;
+    color: white;
+}
+
+.account-divs{
+    width: 50%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.account-divs-1{
+    width: 42%;
+    justify-content: flex-end;
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: white;
+}
+
+.account-divs-2{
+    width: 50%;
+    text-align: left;
+    margin-left: 6px;
+}
+
+.account-inputs{
+    font-size: 18px;
+    width: 200px;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.account-inputs:focus{
+    border-color: #64379b;
+}
+
+.save-button-div{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.save-contract-button{
+    width: 85%;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    font-size: 17px;
+    color: white;
+    background-color: #64379b;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.save-contract-button:hover{
+    background-color: #482870;
+}

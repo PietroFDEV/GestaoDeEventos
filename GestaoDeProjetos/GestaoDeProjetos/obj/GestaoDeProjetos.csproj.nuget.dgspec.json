@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\gestaodeprojetos\\gestaodeprojetos\\GestaoDeProjetos.csproj": {}
+    "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\gestaodeprojetos\\GestaoDeProjetos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\gestaodeprojetos\\gestaodeprojetos\\GestaoDeProjetos.csproj": {
+    "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\gestaodeprojetos\\GestaoDeProjetos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\gestaodeprojetos\\gestaodeprojetos\\GestaoDeProjetos.csproj",
+        "projectUniqueName": "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\gestaodeprojetos\\GestaoDeProjetos.csproj",
         "projectName": "GestaoDeProjetos",
-        "projectPath": "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\gestaodeprojetos\\gestaodeprojetos\\GestaoDeProjetos.csproj",
+        "projectPath": "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\gestaodeprojetos\\GestaoDeProjetos.csproj",
         "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\gestaodeprojetos\\gestaodeprojetos\\obj\\",
+        "outputPath": "C:\\Users\\lucas\\Documents\\GitHub\\GestaoDeEventos\\GestaoDeProjetos\\gestaodeprojetos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
