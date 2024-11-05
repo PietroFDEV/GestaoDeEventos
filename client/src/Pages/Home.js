@@ -26,7 +26,7 @@ function Home(){
                 <img src='banner.png' width='100%'></img>
             </div>
             <div className='home-categories'>
-                <h2>Encontre eventos sla sla sla</h2>
+                <h2>Encontre eventos por categoria</h2>
                 <div className='categories-list'>
                     {categories.map((category, i) => (
                         <a href='#' key={i}>
@@ -73,9 +73,11 @@ function Home(){
             </div>
             <div className='click-here-div'>
                 <h2>Deseja anunciar ou criar seu evento?</h2>
-                <button className='click-here-button'>Clique aqui</button>
+                <a href="/criar-evento">
+                    <button className='click-here-button'>Clique aqui</button>
+                </a>
             </div>
-            <Footer></Footer>
+            <Footer />
         </div>
     )
 }

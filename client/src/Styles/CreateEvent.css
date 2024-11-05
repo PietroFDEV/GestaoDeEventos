@@ -1,0 +1,76 @@
+.ce-container {
+    min-height: 50vh;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 80px 10% 50px 10%;
+}
+
+.ce-title{
+    color: white;
+    font-size: 32px;
+    font-family: 'Lato Bold';
+}
+
+.ce-field-div{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ce-field-title{
+    color: white;
+    margin-bottom: 5px;
+    font-size: 22px;
+}
+
+.ce-field{
+    outline: none;
+    border-width: 0px;
+    font-size: 20px;
+    padding: 10px 10px;
+    width: 300px;
+    border-radius: 3px;
+}
+
+.date-time-div{
+    width: 320px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ce-field-half{
+    outline: none;
+    border-width: 0px;
+    font-size: 20px;
+    padding: 10px 10px;
+    width: 130px;
+    border-radius: 3px;
+    font-family: 'Lato';
+}
+
+.ce-field-select{
+    outline: none;
+    border-width: 0px;
+    font-size: 20px;
+    padding: 10px 10px;
+    width: 320px;
+    border-radius: 3px;
+}
+
+.ce-button-div{
+    margin-top: 10px;
+}
+
+.ce-button{
+    border-width: 0px;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 22px;
+    border-radius: 5px;
+    background-color: #64379b;
+    color: white;
+    cursor: pointer;
+}

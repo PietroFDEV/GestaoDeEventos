@@ -39,7 +39,7 @@ function Login(){
                 Senha: registerUserState.password
             })
 
-            console.log(user.data)
+            navigate("/login")
         }
         else {
             window.alert('Preencha todos os campos!')

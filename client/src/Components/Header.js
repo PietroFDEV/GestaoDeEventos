@@ -57,13 +57,13 @@ const Header = () => {
                 </div>
             </a>
 
-            <a href='#'>
+            <a href='/criar-evento'>
                 <div className='h-create-events h-background'>
                     <p>Criar um evento</p>
                 </div>
             </a>
 
-            <a href='Tickets'>
+            <a href='/tickets'>
                 <div className='h-create-events h-background'>
                     <p>Tickets</p>
                 </div>

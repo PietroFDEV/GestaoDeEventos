@@ -32,6 +32,7 @@ export const AuthProvider = ({children}) => {
         if(resultado === true){
             localStorage.setItem("user", JSON.stringify(loggedUser))
             setUser(loggedUser)
+            navigate('/perfil')
         }
         else {
             navigate("/login")
@@ -42,7 +43,7 @@ export const AuthProvider = ({children}) => {
         localStorage.removeItem("user")
         
         setUser(null)
-        navigate('/login')
+        navigate('/')
     }
 
     return (

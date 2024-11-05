@@ -9,6 +9,7 @@ import MyEvent from './Pages/MyEvent'
 import MyEvents from './Pages/MyEvents';
 import Profile from './Pages/Profile'
 import Tickets from './Pages/Tickets'
+import CreateEvent from './Pages/CreateEvent';
 
 import { AuthProvider, AuthContext } from './Contexts/auth'
 
@@ -41,6 +42,7 @@ function App() {
           <Route path='/meus-eventos' element={<Private> <MyEvents /> </Private>} />
           <Route path='/perfil' element={<Private> <Profile /> </Private>} />
           <Route path='/tickets' element={<Private> <Tickets /> </Private>} />
+          <Route path='/criar-evento' element={<Private> <CreateEvent /> </Private>} />
         </Routes>
       </AuthProvider>
     </Router>
