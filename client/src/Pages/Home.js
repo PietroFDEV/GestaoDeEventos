@@ -56,13 +56,13 @@ function Home(){
                 <h2>Próximos eventos</h2>
                 <div className='events-home-grid'>
                     {events.map((event, i) => (
-                        <a key={i}>
-                            <div className="home-event">
+                        <a key={i} href={`/evento?id=${event.id}`}>
+                            <div className="my-event-div">
                                 <div className='category-circle'>
                                     {categoryIcon(event.categoria_id)}
                                 </div>
                                 <div className="my-event-info">
-                                    <p style={{ marginBottom: '10px', fontSize: '22px' }}>{event.titulo}</p>
+                                    <p className="event-card-title">{event.titulo}</p>
                                     <p style={{ fontSize: '20px' }}>{new Date(event.data).toLocaleDateString()}</p>
                                 </div>
                             </div>

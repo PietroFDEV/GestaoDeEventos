@@ -40,12 +40,12 @@ function MyEvents(){
                 <div className="my-events-grid">
                     {events.map((event, i) => (
                         <a href={`/meu-evento?id=${event.id}`} key={i}>
-                            <div className="my-event-div">     
+                            <div className={new Date(event.data) < new Date() ? "my-event-div-disabled" : "my-event-div"}>     
                                 <div className='category-circle'>
                                     {categoryIcon(event.categoria_id)}
                                 </div>
                                 <div className="my-event-info">
-                                    <p style={{ marginBottom: '10px', fontSize: '22px' }}>{event.titulo}</p>
+                                    <p className="event-card-title">{event.titulo}</p>
                                     <p style={{ fontSize: '20px' }}>{new Date(event.data).toLocaleDateString()}</p>
                                 </div>
                             </div>
@@ -53,7 +53,6 @@ function MyEvents(){
                     ))}
                 </div>
             </div>
-
         </div>
     )
 
