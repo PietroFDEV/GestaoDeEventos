@@ -25,9 +25,11 @@ public partial class Evento
 
     public DateTime? DataCriacao { get; set; }
 
-    public string? endereco { get; set; }
+    public string? Endereco { get; set; }
 
-    public int? categoria_id { get; set; }
+    public int? Categoria_id { get; set; }
+
+    public bool Ativo {  get; set; }
 
     public virtual ICollection<Avaliaco> Avaliacos { get; set; } = new List<Avaliaco>();
 

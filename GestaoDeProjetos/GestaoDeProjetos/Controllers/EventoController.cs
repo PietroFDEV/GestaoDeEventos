@@ -47,6 +47,7 @@ namespace GestaoDeProjetos.Controllers
         public async Task<ActionResult<Evento>> PostEvent(Evento ev)
         {
             ev.DataCriacao = DateTime.Now;
+            ev.Ativo = true;
 
             if (string.IsNullOrWhiteSpace(ev.Titulo) ||
                 string.IsNullOrWhiteSpace(ev.Descricao) ||
@@ -56,8 +57,8 @@ namespace GestaoDeProjetos.Controllers
                 string.IsNullOrWhiteSpace(ev.TipoEvento) ||
                 ev.Capacidade is null or <= 0 ||
                 ev.UsuarioId is null or <= 0 ||
-                string.IsNullOrWhiteSpace(ev.endereco) ||
-                ev.categoria_id is null or <= 0)
+                string.IsNullOrWhiteSpace(ev.Endereco) ||
+                ev.Categoria_id is null or <= 0)
             {
                 return BadRequest("Todos os campos obrigatórios devem ser preenchidos com valores válidos.");
             }
@@ -66,6 +67,22 @@ namespace GestaoDeProjetos.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetEvent), new { id = ev.Id }, ev);
+        }
+
+        [HttpPost("FinishEvent/{id}")]
+        public async Task<ActionResult<Evento>> FinishEvent(int id)
+        {
+            var ev = await _context.Eventos.FindAsync(id);
+
+            if (ev == null)
+            {
+                return NotFound();
+            }
+
+            ev.Ativo = false;
+            await _context.SaveChangesAsync();
+
+            return ev;
         }
     }
 }

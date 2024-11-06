@@ -89,6 +89,7 @@ public partial class GestaoprojetosContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("titulo");
             entity.Property(e => e.UsuarioId).HasColumnName("usuario_id");
+            entity.Property(e => e.Ativo).HasColumnName("ativo");
 
             entity.HasOne(d => d.Usuario).WithMany(p => p.Eventos)
                 .HasForeignKey(d => d.UsuarioId)
