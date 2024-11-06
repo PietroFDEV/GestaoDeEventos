@@ -43,6 +43,9 @@ function MyEvent(){
                         <p>aaaa</p>
                     </div>
                 </div>
+
+
+
             ) : (
                 <div style={{ height: '100%', textAlign: 'center', marginTop: '120px', color: 'white', fontSize: '22px' }}>
                     <p>Você não tem acesso a esta página.</p>
