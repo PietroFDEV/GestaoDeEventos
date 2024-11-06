@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using GestaoDeProjetos.Models;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace GestaoDeProjetos.Controllers
