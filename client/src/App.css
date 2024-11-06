@@ -17,7 +17,7 @@ body{
     font-family: 'Lato';
     background-color: #17181e;
     margin: 0;
-    min-height: 100vh;
+    min-height: 90vh;
 }
 
 h1{
@@ -30,7 +30,7 @@ p{
 }
 
 #root{
-    min-height: 100vh;
+    min-height: 90vh;
 }
 
 a{
@@ -40,6 +40,6 @@ a{
 
 .page{
     width: auto;
-    min-height: 100vh;
+    min-height: 90vh;
     font-family: Arial, Helvetica, sans-serif;
 }

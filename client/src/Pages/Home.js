@@ -4,22 +4,32 @@ import Footer from '../Components/Footer.js'
 import '../Styles/Home.css'
 import { api } from '../api.js'
 import { categories } from "../Contexts/categories.js"
-import { FaIcons } from "react-icons/fa"
 
 function Home(){
+    const [events, setEvents] = useState([{}])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        // api.get('/api/usuario/id/1')
-        // .then(response => {
-        //     console.log(response.data)
-        // })
-        // .catch(error => {
-        //     console.error('Error fetching user data:', error)
-        // })
+        getEvents()
     }, [])
 
+    async function getEvents() {
+        const response = await api.get('/Evento/ListEvents')
+        let eventos = response.data.filter(e => new Date(e.data) >= new Date() )
+        eventos = eventos.sort((a, b) => b.capacidade - a.capacidade).slice(0, 8)
+        setEvents(eventos)
+        setLoading(false)
+    }
 
-    return(
+    function categoryIcon(id){
+        const category = categories.filter(c => c.cod === id)[0]
+
+        return (
+            category.icon
+        )
+    }
+
+    if (!loading) return(
         <div className='home-page'>
             <Header logged={false}></Header>
             <div className='home-banner'>
@@ -43,32 +53,21 @@ function Home(){
                 </div>
             </div>
             <div className='next-events'>
-                <h2>Próximos grandes eventos</h2>
+                <h2>Próximos eventos</h2>
                 <div className='events-home-grid'>
-                    <div className='home-event'>
-
-                    </div>
-                    <div className='home-event'>
-                        
-                    </div>
-                    <div className='home-event'>
-                        
-                    </div>
-                    <div className='home-event'>
-                        
-                    </div>
-                    <div className='home-event'>
-                        
-                    </div>
-                    <div className='home-event'>
-                        
-                    </div>
-                    <div className='home-event'>
-                        
-                    </div>
-                    <div className='home-event'>
-                        
-                    </div>
+                    {events.map((event, i) => (
+                        <a key={i}>
+                            <div className="home-event">
+                                <div className='category-circle'>
+                                    {categoryIcon(event.categoria_id)}
+                                </div>
+                                <div className="my-event-info">
+                                    <p style={{ marginBottom: '10px', fontSize: '22px' }}>{event.titulo}</p>
+                                    <p style={{ fontSize: '20px' }}>{new Date(event.data).toLocaleDateString()}</p>
+                                </div>
+                            </div>
+                        </a>
+                    ))}
                 </div>
             </div>
             <div className='click-here-div'>
@@ -78,6 +77,12 @@ function Home(){
                 </a>
             </div>
             <Footer />
+        </div>
+    )
+
+    return (
+        <div>
+            <p>Carregando...</p>
         </div>
     )
 }
