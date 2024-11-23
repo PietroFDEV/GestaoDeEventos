@@ -94,9 +94,9 @@ function Event(){
                 <Header />
                 <div className="event-page">
                     <div className="event-page-left" style={{ width: '60%', color: 'white', marginRight: '5%' }}>
-                        <div className="event-page-section-1" style={{ display: 'flex', flexDirection: 'column' }}>
-                            <p style={{ fontSize: '40px', fontFamily: 'Lato Bold' }}>{event.titulo}</p>
-                            <p style={{ color: 'lightgray', fontSize: '26px', marginTop: '10px', marginBottom: '50px' }}>{event.descricao}</p>
+                        <div className="event-page-section-1" style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+                            <p style={{ fontSize: '40px', fontFamily: 'Lato Bold' }}>{event.titulo} {event.ativo ? '' : ' - Finalizado'}</p>
+                            <p style={{ color: 'lightgray', fontSize: '26px', marginTop: '10px', marginBottom: '50px', wordWrap: 'break-word', overflowWrap: 'break-word' }}>{event.descricao}</p>
 
                             <p style={{ marginBottom: '10px', fontSize: '26px', fontFamily: 'Lato Bold' }}>Categoria do Evento</p>
                             <div className="event-page-category-div">
@@ -182,7 +182,7 @@ function Event(){
                                     
                                     <p style={{ fontSize: '22px', marginLeft: '30px' }}>{ratings.length} {ratings.length === 1 ? 'Avaliação' : 'Avaliações'}</p>
                                 </div>
-                                <div className="avaliations-div" style={{ marginTop: '30px' }}>
+                                <div id="avaliations-div" style={{ marginTop: '30px' }}>
                                     {ratings.map((rating, i) => (
                                         <div style={{ display: 'flex', flexDirection: 'column', borderBottom: '1px solid white', width: '350px', 
                                         boxSizing: 'border-box', paddingBottom: '8px', marginBottom: '15px' }} key={i}>
@@ -215,17 +215,26 @@ function Event(){
                     <div className="event-page-right" style={{ width: '35%' }}>
                         <div className="select-tickets-div" style={{ position: 'fixed', border: '1px solid gray', width: '370px', height: '70px', borderRadius: '10px',
                         display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            {tickets === 0 ? (
+                            {event.ativo ? 
+                                tickets === 0 ? (
+                                    <div className="select-tickets-inner">
+                                        <a href="#tickets-div">
+                                            <p style={{ fontSize: '20px' }}>Selecionar ingressos</p>
+                                        </a>
+                                    </div>
+                                ) : (
+                                    <div className="select-tickets-inner">
+                                        <p style={{ fontSize: '20px' }}>Checkout para R$ {(event.preco * tickets).toFixed(2).replace('.', ',')}</p>
+                                    </div>
+                                )
+                            : (
                                 <div className="select-tickets-inner">
-                                    <a href="#tickets-div">
-                                        <p style={{ fontSize: '20px' }}>Selecionar ingressos</p>
+                                    <a href="#avaliations-div">
+                                        <p style={{ fontSize: '20px' }}>Visualizar avaliações</p>
                                     </a>
                                 </div>
-                            ) : (
-                                <div className="select-tickets-inner">
-                                    <p style={{ fontSize: '20px' }}>Checkout para R$ {(event.preco * tickets).toFixed(2).replace('.', ',')}</p>
-                                </div>
                             )}
+                            
                             
                         </div>
                     </div>

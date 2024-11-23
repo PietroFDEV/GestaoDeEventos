@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import Header from "../Components/Header"
 import { api } from "../api"
 import { categories } from "../Contexts/categories.js"
@@ -21,7 +21,7 @@ function MyEvent(){
 
     useEffect(() => {
         loadEvent()
-    }, [])
+    }, [id])
 
     async function loadEvent(){
         const user = await JSON.parse(localStorage.getItem('user'))
@@ -30,7 +30,7 @@ function MyEvent(){
             setEvent(response.data)
             setVerify(true)
             const ticket = await loadTickets(response.data.id)
-            const avaliation = await loadAvaliations(response.data.id)
+            await loadAvaliations(response.data.id)
             calcRange(response.data.capacidade, ticket.length)
         } else {
             setVerify(false)
@@ -89,18 +89,19 @@ function MyEvent(){
                         <h3 style={{ color: 'white', fontSize: '26px' }}>Detalhes do evento {!event.ativo ? ' - Finalizado' : null}</h3>
 
                         <div className="event-info-grid-top" style={{ display: 'flex', flexDirection: 'row', marginBottom: '30px', width: '60%' }}>
-                            <div className="event-info-card" style={{ display: 'flex', flexDirection: 'row', marginRight: '30px' }}>
+                            <div className="event-info-card" style={{ display: 'flex', flexDirection: 'row', marginRight: '3%', minWidth: '44%', justifyContent: 'start' }}>
                                 <div className="event-info-card-icon-div" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'
                                     , marginRight: '10px', width: '60px', height: '60px', borderRadius: '10px' }}>
                                     <FaRegFlag color='black' size='40px' />
                                 </div>
-                                <div className="event-info-card-text-div" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                                <div className="event-info-card-text-div" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '70%' }}>
                                     <p className="event-info-card-title" style={{ fontSize: '22px' }}>{event.titulo}</p>
-                                    <p className="event-info-card-description" style={{ fontSize: '18px', color: 'lightgray' }}>{event.descricao}</p>
+                                    <p className="event-info-card-description" style={{ fontSize: '18px', color: 'lightgray', 
+                                    maxWidth: '100%', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{event.descricao}</p>
                                 </div>    
                             </div>
 
-                            <div className="event-info-card" style={{ display: 'flex', flexDirection: 'row'}}>
+                            <div className="event-info-card" style={{ display: 'flex', flexDirection: 'row', minWidth: '44%'}}>
                                 <div className="event-info-card-icon-div" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'
                                     , marginRight: '10px', width: '60px', height: '60px', borderRadius: '10px' }}>
                                     {category(event.categoria_id).icon}

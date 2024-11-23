@@ -110,6 +110,7 @@
     display: flex;
     transition: 0.2s;
     width: 50%;
+    max-width: 50%;
 }
 
 .event-info-card-title{
