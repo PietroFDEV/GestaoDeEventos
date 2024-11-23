@@ -31,7 +31,7 @@ public partial class Evento
 
     public bool Ativo {  get; set; }
 
-    public int? Preco { get; set; }
+    public decimal? Preco { get; set; }
 
     public virtual ICollection<Avaliaco> Avaliacos { get; set; } = new List<Avaliaco>();
 

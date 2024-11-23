@@ -60,7 +60,7 @@ namespace GestaoDeProjetos.Migrations
                     tipo_evento = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
                     capacidade = table.Column<int>(type: "int", nullable: true),
                     usuario_id = table.Column<int>(type: "int", nullable: true),
-                    preco = table.Column<int>(type: "int", nullable: true),
+                    preco = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     data_criacao = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP")
                 },
                 constraints: table =>
@@ -98,29 +98,6 @@ namespace GestaoDeProjetos.Migrations
                         name: "avaliacoes_ibfk_2",
                         column: x => x.usuario_id,
                         principalTable: "usuarios",
-                        principalColumn: "id");
-                })
-                .Annotation("MySQL:Charset", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "eventos_categorias",
-                columns: table => new
-                {
-                    evento_id = table.Column<int>(type: "int", nullable: false),
-                    categoria_id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PRIMARY", x => new { x.evento_id, x.categoria_id });
-                    table.ForeignKey(
-                        name: "eventos_categorias_ibfk_1",
-                        column: x => x.evento_id,
-                        principalTable: "eventos",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "eventos_categorias_ibfk_2",
-                        column: x => x.categoria_id,
-                        principalTable: "categorias",
                         principalColumn: "id");
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");

@@ -108,7 +108,7 @@ namespace GestaoDeProjetos.Migrations
                         .HasColumnName("usuario_id");
 
                     b.Property<int?>("Preco")
-                        .HasColumnType("int")
+                        .HasColumnType("decimal(10,2)")
                         .HasColumnName("preco");
 
                     b.HasKey("Id")
