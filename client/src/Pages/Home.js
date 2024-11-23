@@ -15,7 +15,7 @@ function Home(){
 
     async function getEvents() {
         const response = await api.get('/Evento/ListEvents')
-        let eventos = response.data.filter(e => new Date(e.data) >= new Date() )
+        let eventos = response.data.filter(e => e.ativo === true)
         eventos = eventos.sort((a, b) => b.capacidade - a.capacidade).slice(0, 8)
         setEvents(eventos)
         setLoading(false)

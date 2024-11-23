@@ -13,11 +13,11 @@ function Tickets(){
     }, [])
 
     async function loadTickets(){
-        //const user = await JSON.parse(localStorage.getItem('user'))
-        //const response = await api.get('/Ticket/ListTickets')
-        //const myTickets = response.data.filter(e => e.usuarioId === user.id)
-        //setTickets(myTickets)
-        //setLoading(false)
+        const user = await JSON.parse(localStorage.getItem('user'))
+        const response = await api.get('/Ticket/ListTickets')
+        const myTickets = response.data.filter(e => e.usuarioId === user.id)
+        setTickets(myTickets)
+        setLoading(false)
     }
 
     if (!loading) return(
