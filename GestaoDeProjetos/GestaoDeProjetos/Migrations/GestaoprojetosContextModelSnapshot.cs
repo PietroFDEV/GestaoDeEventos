@@ -19,24 +19,6 @@ namespace GestaoDeProjetos.Migrations
                 .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("EventosCategoria", b =>
-                {
-                    b.Property<int>("EventoId")
-                        .HasColumnType("int")
-                        .HasColumnName("evento_id");
-
-                    b.Property<int>("CategoriaId")
-                        .HasColumnType("int")
-                        .HasColumnName("categoria_id");
-
-                    b.HasKey("EventoId", "CategoriaId")
-                        .HasName("PRIMARY");
-
-                    b.HasIndex(new[] { "CategoriaId" }, "categoria_id");
-
-                    b.ToTable("eventos_categorias", (string)null);
-                });
-
             modelBuilder.Entity("GestaoDeProjetos.Models.Avaliaco", b =>
                 {
                     b.Property<int>("Id")
@@ -74,25 +56,6 @@ namespace GestaoDeProjetos.Migrations
                     b.HasIndex(new[] { "UsuarioId" }, "usuario_id");
 
                     b.ToTable("avaliacoes", (string)null);
-                });
-
-            modelBuilder.Entity("GestaoDeProjetos.Models.Categoria", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("nome");
-
-                    b.HasKey("Id")
-                        .HasName("PRIMARY");
-
-                    b.ToTable("categorias", (string)null);
                 });
 
             modelBuilder.Entity("GestaoDeProjetos.Models.Evento", b =>
@@ -144,6 +107,10 @@ namespace GestaoDeProjetos.Migrations
                         .HasColumnType("int")
                         .HasColumnName("usuario_id");
 
+                    b.Property<int?>("Preco")
+                        .HasColumnType("int")
+                        .HasColumnName("preco");
+
                     b.HasKey("Id")
                         .HasName("PRIMARY");
 
@@ -151,46 +118,6 @@ namespace GestaoDeProjetos.Migrations
                         .HasDatabaseName("usuario_id1");
 
                     b.ToTable("eventos", (string)null);
-                });
-
-            modelBuilder.Entity("GestaoDeProjetos.Models.Localidade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Cep")
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)")
-                        .HasColumnName("cep");
-
-                    b.Property<string>("Cidade")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("cidade");
-
-                    b.Property<string>("Endereco")
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("endereco");
-
-                    b.Property<string>("Estado")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("estado");
-
-                    b.Property<int?>("EventoId")
-                        .HasColumnType("int")
-                        .HasColumnName("evento_id");
-
-                    b.HasKey("Id")
-                        .HasName("PRIMARY");
-
-                    b.HasIndex(new[] { "EventoId" }, "evento_id")
-                        .HasDatabaseName("evento_id1");
-
-                    b.ToTable("localidades", (string)null);
                 });
 
             modelBuilder.Entity("GestaoDeProjetos.Models.Ticket", b =>
@@ -282,21 +209,6 @@ namespace GestaoDeProjetos.Migrations
                     b.ToTable("usuarios", (string)null);
                 });
 
-            modelBuilder.Entity("EventosCategoria", b =>
-                {
-                    b.HasOne("GestaoDeProjetos.Models.Categoria", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriaId")
-                        .IsRequired()
-                        .HasConstraintName("eventos_categorias_ibfk_2");
-
-                    b.HasOne("GestaoDeProjetos.Models.Evento", null)
-                        .WithMany()
-                        .HasForeignKey("EventoId")
-                        .IsRequired()
-                        .HasConstraintName("eventos_categorias_ibfk_1");
-                });
-
             modelBuilder.Entity("GestaoDeProjetos.Models.Avaliaco", b =>
                 {
                     b.HasOne("GestaoDeProjetos.Models.Evento", "Evento")
@@ -322,16 +234,6 @@ namespace GestaoDeProjetos.Migrations
                         .HasConstraintName("eventos_ibfk_1");
 
                     b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("GestaoDeProjetos.Models.Localidade", b =>
-                {
-                    b.HasOne("GestaoDeProjetos.Models.Evento", "Evento")
-                        .WithMany("Localidades")
-                        .HasForeignKey("EventoId")
-                        .HasConstraintName("localidades_ibfk_1");
-
-                    b.Navigation("Evento");
                 });
 
             modelBuilder.Entity("GestaoDeProjetos.Models.Ticket", b =>

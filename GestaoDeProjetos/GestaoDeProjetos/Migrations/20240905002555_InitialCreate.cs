@@ -60,6 +60,7 @@ namespace GestaoDeProjetos.Migrations
                     tipo_evento = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
                     capacidade = table.Column<int>(type: "int", nullable: true),
                     usuario_id = table.Column<int>(type: "int", nullable: true),
+                    preco = table.Column<int>(type: "int", nullable: true),
                     data_criacao = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP")
                 },
                 constraints: table =>

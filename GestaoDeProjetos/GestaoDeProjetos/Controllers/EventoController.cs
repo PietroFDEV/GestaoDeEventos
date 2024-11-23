@@ -49,14 +49,15 @@ namespace GestaoDeProjetos.Controllers
 
             if (string.IsNullOrWhiteSpace(ev.Titulo) ||
                 string.IsNullOrWhiteSpace(ev.Descricao) ||
-                ev.Data == default ||
-                ev.Hora == default ||
                 string.IsNullOrWhiteSpace(ev.Local) ||
                 string.IsNullOrWhiteSpace(ev.TipoEvento) ||
+                string.IsNullOrWhiteSpace(ev.Endereco) ||
+                ev.Data == default ||
+                ev.Hora == default ||
                 ev.Capacidade is null or <= 0 ||
                 ev.UsuarioId is null or <= 0 ||
-                string.IsNullOrWhiteSpace(ev.Endereco) ||
-                ev.Categoria_id is null or <= 0)
+                ev.Categoria_id is null or <= 0 ||
+                ev.Preco is null or <= 0)
             {
                 return BadRequest("Todos os campos obrigatórios devem ser preenchidos com valores válidos.");
             }
