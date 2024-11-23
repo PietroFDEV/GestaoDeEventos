@@ -23,13 +23,15 @@ function MyEvents(){
         setLoading(false)
     }
 
-    function categoryIcon(id){
+    function category(id){
         const category = categories.filter(c => c.cod === id)[0]
 
         return (
-            category.icon
+            category
         )
     }
+
+
 
     if (!loading) return(
         <div className="my-events-page">
@@ -40,9 +42,9 @@ function MyEvents(){
                 <div className="my-events-grid">
                     {events.map((event, i) => (
                         <a href={`/meu-evento?id=${event.id}`} key={i}>
-                            <div className={new Date(event.data) < new Date() ? "my-event-div-disabled" : "my-event-div"}>     
+                            <div className={event.ativo ? "my-event-div" : "my-event-div-disabled"}>     
                                 <div className='category-circle'>
-                                    {categoryIcon(event.categoria_id)}
+                                    {category(event.categoria_id).icon}
                                 </div>
                                 <div className="my-event-info">
                                     <p className="event-card-title">{event.titulo}</p>

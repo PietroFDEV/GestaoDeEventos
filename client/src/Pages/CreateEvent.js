@@ -23,13 +23,14 @@ function CreateEvent(){
             endereco: event.endereco,
             categoria_id: parseInt(event.categoria_id),
             UsuarioId: user.id,
-            TipoEvento: 'evento'
+            TipoEvento: 'evento',
+            Ativo: true
         }
 
         const response = await api.post('/Evento/CreateEvent', ev)
 
         if(response.status === 201){
-            navigate(`/evento?id=${response.data.id}`)
+            navigate(`/meu-evento?id=${response.data.id}`)
         }
     }
 
