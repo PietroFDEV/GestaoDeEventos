@@ -39,7 +39,7 @@ function Home(){
                 <h2>Encontre eventos por categoria</h2>
                 <div className='categories-list'>
                     {categories.map((category, i) => (
-                        <a href='#' key={i}>
+                        <a href={`/eventos?cat=${category.cod}`} key={i}>
                             <div className='category'>
                                 <div className='category-circle'>
                                     {category.icon}

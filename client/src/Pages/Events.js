@@ -5,6 +5,7 @@ import '../Styles/Events.css'
 import { useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { IoFilter } from "react-icons/io5"
+import { categories } from "../Contexts/categories.js"
 
 function Events(){
     const [searchParams, setSearchParams] = useState({ search: '', cat: '', dataMin: '', dataMax: '' })
@@ -52,6 +53,14 @@ function Events(){
         setLoading(false)
     }
 
+    function categoryIcon(id){
+        const category = categories.filter(c => c.cod === id)[0]
+
+        return (
+            category.icon
+        )
+    }
+
     if (!loading) {
         return (
             <div>
@@ -67,12 +76,18 @@ function Events(){
                         </div>
                     </div>
                     
-                    <div className='events-middle' style={{ width: '100%' }}>
+                    <div className='events-middle' style={{ width: '100%', marginTop: '20px' }}>
                         <div className='events-page-grid'>
                             {events.map((event, i) => (
                                 <a key={i} href={`/evento?id=${event.id}`}>
-                                    <div className='events-page-grid-item'>
-                                        <p>{event.titulo}</p>
+                                    <div className="my-event-div">
+                                        <div className='category-circle'>
+                                            {categoryIcon(event.categoria_id)}
+                                        </div>
+                                        <div className="my-event-info">
+                                            <p className="event-card-title">{event.titulo}</p>
+                                            <p style={{ fontSize: '20px' }}>{new Date(event.data).toLocaleDateString()}</p>
+                                        </div>
                                     </div>
                                 </a>
                             ))}
