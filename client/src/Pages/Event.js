@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import Header from "../Components/Header"
 import Footer from "../Components/Footer.js"
@@ -7,7 +7,9 @@ import { categories } from "../Contexts/categories.js"
 import { BsCalendar2Date } from "react-icons/bs"
 import { MdOutlinePlace } from "react-icons/md"
 import { FaStar } from "react-icons/fa"
+import { FaRegStar } from "react-icons/fa"
 import '../Styles/Event.css'
+import { AuthContext } from "../Contexts/auth"
 
 function Event(){
     const [loading, setLoading] = useState(true)
@@ -16,12 +18,18 @@ function Event(){
     const [manyEvents, setManyEvents] = useState(0)
     const [initials, setInitials] = useState()
     const [tickets, setTickets] = useState(0)
+    const [ableToComment, setAbleToComment] = useState(false)
     const [ratings, setRatings] = useState([{}])
     const [averageRating, setAverageRating] = useState(0.0)
+    const [stars, setStars] = useState(0)
+    const [comment, setComment] = useState('')
+    const { authenticated } = useContext(AuthContext)
 
     const useQuery = () => new URLSearchParams(useLocation().search)
     const query = useQuery()
     const id = query.get('id')
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         loadEvent()
@@ -31,7 +39,9 @@ function Event(){
         const response = await api.get(`/Evento/${id}`)
         setEvent(response.data)
         await loadCreator(response.data.usuarioId)
-        await loadRatings(id)
+        const rating = await loadRatings(id)
+        const soldTickets = await loadTickets(id)
+        await verifyUser(soldTickets, rating)
         setLoading(false)
     }
 
@@ -86,6 +96,69 @@ function Event(){
         })
 
         setRatings(mergedRatings)
+
+        return mergedRatings
+    }
+
+    async function loadTickets(eventoId) {
+        const response = await api.get(`/Ticket/EventId/${eventoId}`)
+        return response.data
+    }
+
+    async function checkOut() {
+        if(authenticated === true){
+            const user = await JSON.parse(localStorage.getItem('user'))
+            const ticket = {
+                EventoId: event.id,
+                UsuarioId: user.id,
+                CodigoQr: '1',
+                Lote: 1,
+                Preco: event.preco
+            }
+            for(let i = 0; i < tickets; i++){
+                await api.post(`/Ticket/CreateTicket`, ticket)
+            }
+            
+            navigate('/tickets')
+        } else {
+            navigate('/login')
+        }
+    }
+
+    async function submitRating() {
+        if(authenticated === true){
+            const user = await JSON.parse(localStorage.getItem('user'))
+            const rating = {
+                EventoId: event.id,
+                UsuarioId: user.id,
+                Nota: stars,
+                Comentario: comment
+            }
+            await api.post(`/Rating/CreateRating`, rating)
+            window.location.reload()
+        }
+    }
+
+    async function verifyUser(soldTickets, ratings){
+        const user = await JSON.parse(localStorage.getItem('user'))
+        if(user){
+            const alreadyCommented = ratings.find(r => r.usuarioId == user.id)
+            if(alreadyCommented !== undefined){
+                setAbleToComment(false)
+                return
+            }
+            
+            const buyed = soldTickets.find(s => s.usuarioId == user.id)
+            if(!buyed){
+                setAbleToComment(false)
+                return
+            }
+            setAbleToComment(true)
+            return
+        } else {
+            setAbleToComment(false)
+            return
+        }
     }
 
     if(!loading) {
@@ -182,39 +255,68 @@ function Event(){
                                     
                                     <p style={{ fontSize: '22px', marginLeft: '30px' }}>{ratings.length} {ratings.length === 1 ? 'Avaliação' : 'Avaliações'}</p>
                                 </div>
-                                <div id="avaliations-div" style={{ marginTop: '30px' }}>
-                                    {ratings.map((rating, i) => (
-                                        <div style={{ display: 'flex', flexDirection: 'column', borderBottom: '1px solid white', width: '350px', 
-                                        boxSizing: 'border-box', paddingBottom: '8px', marginBottom: '15px' }} key={i}>
-                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <div>
-                                                <div className="account-divs" id="account-initials" style={{ fontSize: '18px', width: '45px', height: '45px', margin: '0 10px 0 0' }}>
-                                                    {getInitials(rating.user.nome)}
+                                <div id="avaliations-div" style={{ marginTop: '30px', display: 'flex', flexDirection: 'row' }}>
+                                    <div style={{ width: '350px', marginRight: '30px' }}>
+                                        {ratings.map((rating, i) => (
+                                            <div style={{ display: 'flex', flexDirection: 'column', borderBottom: '1px solid white', width: '100%',
+                                            boxSizing: 'border-box', paddingBottom: '8px', marginBottom: '15px' }} key={i}>
+                                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                                    <div>
+                                                    <div className="account-divs" id="account-initials" style={{ fontSize: '18px', width: '45px', height: '45px', margin: '0 10px 0 0' }}>
+                                                        {getInitials(rating.user.nome)}
+                                                    </div>
+                                                    </div>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', width: '250px' }}>
+                                                        <p style={{ fontSize: '18px', fontFamily: 'Lato Bold' }}>{rating.user.nome}</p>
+                                                        <p style={{ fontSize: '16px', marginTop: '3px', color: 'lightgray' }}>{new Date(rating.dataAvaliacao).toLocaleDateString()}</p>
+                                                    </div>
+                                                    <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
+                                                        <p style={{ fontSize: '22px', marginRight: '5px' }}>{rating.nota}</p>
+                                                        <FaStar color='#64379b' size='25px' />
+                                                    </div>
                                                 </div>
-                                                </div>
-                                                <div style={{ display: 'flex', flexDirection: 'column', width: '250px' }}>
-                                                    <p style={{ fontSize: '18px', fontFamily: 'Lato Bold' }}>{rating.user.nome}</p>
-                                                    <p style={{ fontSize: '16px', marginTop: '3px', color: 'lightgray' }}>{new Date(rating.dataAvaliacao).toLocaleDateString()}</p>
-                                                </div>
-                                                <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
-                                                    <p style={{ fontSize: '22px', marginRight: '5px' }}>{rating.nota}</p>
-                                                    <FaStar color='#64379b' size='25px' />
+                                                
+                                                <div style={{ marginTop: '10px' }}>
+                                                    <p style={{ fontSize: '18px' }}>{rating.comentario}</p>
                                                 </div>
                                             </div>
-                                            
-                                            <div style={{ marginTop: '10px' }}>
-                                                <p style={{ fontSize: '18px' }}>{rating.comentario}</p>
+                                        ))}
+                                        
+                                    </div>
+                                    {ableToComment ? (
+                                        <div style={{ width: '350px', display: 'flex', flexDirection: 'column' }}>
+                                            <p style={{ fontSize: '22px' }}>Deixe sua avaliação</p>
+                                            <div className="star-div" style={{ display: 'flex', flexDirection: 'row', marginTop: '10px', width: '100%' }}>
+                                                {stars >= 1 ? <FaStar color='#64379b' size='25px' style={{ cursor: 'pointer', marginRight: '10px' }} onClick={() => setStars(1)}/>
+                                                : <FaRegStar color='#64379b' size='25px' style={{ cursor: 'pointer', marginRight: '10px' }} onClick={() => setStars(1)}/>}
+                                                {stars >= 2 ? <FaStar color='#64379b' size='25px' style={{ cursor: 'pointer', marginRight: '10px' }} onClick={() => setStars(2)}/>
+                                                : <FaRegStar color='#64379b' size='25px' style={{ cursor: 'pointer', marginRight: '10px' }} onClick={() => setStars(2)}/>}
+                                                {stars >= 3 ? <FaStar color='#64379b' size='25px' style={{ cursor: 'pointer', marginRight: '10px' }} onClick={() => setStars(3)}/>
+                                                : <FaRegStar color='#64379b' size='25px' style={{ cursor: 'pointer', marginRight: '10px' }} onClick={() => setStars(3)}/>}
+                                                {stars >= 4 ? <FaStar color='#64379b' size='25px' style={{ cursor: 'pointer', marginRight: '10px' }} onClick={() => setStars(4)}/>
+                                                : <FaRegStar color='#64379b' size='25px' style={{ cursor: 'pointer', marginRight: '10px' }} onClick={() => setStars(4)}/>}
+                                                {stars == 5 ? <FaStar color='#64379b' size='25px' style={{ cursor: 'pointer' }} onClick={() => setStars(5)}/>
+                                                : <FaRegStar color='#64379b' size='25px' style={{ cursor: 'pointer' }} onClick={() => setStars(5)}/>}
                                             </div>
+                                            <textarea type="text" placeholder="Escreva sua avaliação aqui" style={{ fontFamily: 'Lato', fontSize: '16px', outline: 'none',
+                                                marginTop: '15px', padding: '5px', resize: 'none', width: '90%', height: '60px', borderRadius: '5px', border: '0px'
+                                            }} value={comment} onChange={(e) => setComment(e.target.value)} />
+                                            <button style={{ cursor: 'pointer', marginTop: '15px', width: '180px', backgroundColor: '#64379b', border: '0px', color: 'white',
+                                            fontSize: '18px', height: '40px', borderRadius: '5px'
+                                            }} onClick={() => submitRating() }>Enviar avaliação</button>
                                         </div>
-                                    ))}
+                                    ) : (
+                                        null
+                                    )}
                                     
                                 </div>
+                                
                             </div>
                         ) : (null)}
                     </div>
                     <div className="event-page-right" style={{ width: '35%' }}>
                         <div className="select-tickets-div" style={{ position: 'fixed', border: '1px solid gray', width: '370px', height: '70px', borderRadius: '10px',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '50px' }}>
                             {event.ativo ? 
                                 tickets === 0 ? (
                                     <div className="select-tickets-inner">
@@ -223,8 +325,8 @@ function Event(){
                                         </a>
                                     </div>
                                 ) : (
-                                    <div className="select-tickets-inner">
-                                        <p style={{ fontSize: '20px' }}>Checkout para R$ {(event.preco * tickets).toFixed(2).replace('.', ',')}</p>
+                                    <div className="select-tickets-inner" onClick={() => checkOut()}>
+                                        <p style={{ fontSize: '20px' }}>Comprar ( R$ {(event.preco * tickets).toFixed(2).replace('.', ',')} )</p>
                                     </div>
                                 )
                             : (
