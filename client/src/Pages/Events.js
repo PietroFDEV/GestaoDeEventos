@@ -8,7 +8,7 @@ import { IoFilter } from "react-icons/io5"
 import { categories } from "../Contexts/categories.js"
 
 function Events(){
-    const [searchParams, setSearchParams] = useState({ search: '', cat: '', dataMin: '', dataMax: '' })
+    const [searchParams, setSearchParams] = useState({ search: '', cat: '', dataMin: '', dataMax: '', preco: 0 })
     const [events, setEvents] = useState([{}])
     const [loading, setLoading] = useState(true)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
@@ -18,17 +18,27 @@ function Events(){
     const query = useQuery()
 
     useEffect(() => {
+        loadPage()
+    }, [])
+
+    async function loadPage(){
         const search = query.get('search')
         const cat = query.get('cat')
         const dataMin = query.get('dataMin')
         const dataMax = query.get('dataMax')
+        const preco = query.get('preco')
 
-        const params = {search: search, cat: cat, dataMin: dataMin, dataMax: dataMax}
+        const params = {search: search, cat: cat, dataMin: dataMin, dataMax: dataMax, preco: preco}
 
-        setSearchParams(params)
+        await setSearchParams(params)
 
-        filterEvents(params)
-    }, [])
+        await filterEvents(params)
+    }
+
+    async function reloadPage(params) {
+        await filterEvents(params)
+        setIsFilterOpen(false)
+    }
 
     async function filterEvents(params) {
         const response = await api.get(`/Evento/ListEvents`)
@@ -49,6 +59,15 @@ function Events(){
             eventos = eventos.filter(e => e.data <= params.dataMax)
         }
 
+        if(params.preco){
+            if(params.preco !== '0'){
+                eventos = eventos.filter(e => e.preco > 0)
+            } else {
+                eventos = eventos.filter(e => e.preco == 0)
+            }
+        }
+        
+
         setEvents(eventos)
         setLoading(false)
     }
@@ -59,6 +78,25 @@ function Events(){
         return (
             category.icon
         )
+    }
+
+    function changeParams(){
+        const newSearchParams = {
+            search: searchParams.search,
+            cat: searchParams.cat,
+            dataMin: searchParams.dataMin,
+            dataMax: searchParams.dataMax,
+            preco: searchParams.preco
+        }
+        const params = new URLSearchParams(window.location.search)
+        params.set('search', searchParams.search || '')
+        params.set('cat', searchParams.cat || '')
+        params.set('dataMin', searchParams.dataMin || '')
+        params.set('dataMax', searchParams.dataMax || '')
+        params.set('preco', searchParams.preco || 0)
+        navigate(`?${params.toString()}`, { replace: true })
+
+        reloadPage(newSearchParams)
     }
 
     if (!loading) {
@@ -104,10 +142,53 @@ function Events(){
                             </div>
                             
                             <div className="filters-options">
-                                {/* Adicione seus filtros aqui */}
-                                <p>Categoria</p>
-                                <p>Data</p>
-                                <p>Local</p>
+                                <div className='categorias-div'>
+                                    <p style={{ fontSize: '22px' }}>Categoria</p>
+                                    <select defaultValue={searchParams.cat} className='select-category' onChange={(e) => setSearchParams({...searchParams, cat: e.target.value})}>
+                                        <option value={null}>Selecione</option>
+                                        <option value={1}>Festa</option>
+                                        <option value={2}>Show</option>
+                                        <option value={3}>Arte</option>
+                                        <option value={4}>Esporte</option>
+                                        <option value={5}>Gastronomia</option>
+                                        <option value={6}>Tecnologia</option>
+                                        <option value={7}>Religioso</option>
+                                        <option value={8}>Games</option>
+                                        <option value={9}>Outros</option>
+                                    </select>
+                                </div>
+
+                                <div className='' style={{ marginTop: '30px' }}>
+                                    <p style={{ fontSize: '22px' }}>Data</p>
+                                    <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                        <p style={{ fontSize: '18px', width: '30px' }}>De:</p>
+                                        <input type='date' style={{ marginLeft: '10px', fontSize: '18px', fontFamily: 'Lato', borderRadius: '5px', border: '0',
+                                            padding: '2px 5px', cursor: 'pointer', outline: 'none' }} defaultValue={searchParams.dataMin} 
+                                            onChange={(e) => setSearchParams({...searchParams, dataMin: e.target.value})}
+                                        />
+                                    </div>
+                                    <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                        <p style={{ fontSize: '18px', width: '30px' }}>Até:</p>
+                                        <input type='date' style={{ marginLeft: '10px', fontSize: '18px', fontFamily: 'Lato', borderRadius: '5px', border: '0',
+                                            padding: '2px 5px', cursor: 'pointer', outline: 'none' }} defaultValue={searchParams.dataMax} 
+                                            onChange={(e) => setSearchParams({...searchParams, dataMax: e.target.value})}
+                                        />
+                                    </div>
+                                </div>
+
+                                <div style={{ marginTop: '30px' }}>
+                                    <p style={{ fontSize: '22px' }}>Preço</p>
+                                    <select defaultValue={searchParams.preco} className='select-category' onChange={(e) => setSearchParams({...searchParams, preco: e.target.value})}>
+                                        <option value={null}>Selecione</option>
+                                        <option value={0}>Grátis</option>
+                                        <option value={1}>Pago</option>
+                                    </select>
+
+                                </div>
+
+                                <div style={{ marginTop: '30px' }}>
+                                    <button className='apply-filter-button' onClick={() => changeParams()}>Aplicar filtros</button>
+                                </div>
                             </div>
                         </div>
                         <div style={{ minWidth: '80%', minHeight: '100%', marginLeft: '20%' }} onClick={() => setIsFilterOpen(false)}>

@@ -83,3 +83,38 @@
       transform: translateX(0);
     }
 }
+
+.apply-filter-button{
+    font-size: 18px; 
+    width: 160px;
+    height: 35px; 
+    cursor: pointer; 
+    background-color: #64379b; 
+    color: white;
+    border: 0;
+    border-radius: 5px; 
+    font-family: 'Lato Bold';
+    transition: 0.2s;
+}
+
+.apply-filter-button:hover{
+    background-color: #64379bb4;
+}
+
+.select-category{
+    font-size: 20px;
+    padding: 5px 10px;
+    margin-top: 10px;
+    width: 200px;
+    border: 2px solid white;
+    outline: none;
+    border-radius: 50px;
+    background-color: #17181e;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.select-category:hover{
+    border-color: #64379b;
+}
