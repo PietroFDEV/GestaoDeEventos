@@ -53,7 +53,10 @@ function MyEvent(){
         for(let i = 0; i < avaliation.length; i++){
             total = total + avaliation[i].nota
         }
-        const average = (total / avaliation.length).toFixed(1)
+        let average = (total / avaliation.length).toFixed(1)
+        if(avaliation.length === 0){
+            average = 0
+        }
         setAverageRating(average)
     }
 

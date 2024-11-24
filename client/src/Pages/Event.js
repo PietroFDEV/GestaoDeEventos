@@ -79,7 +79,10 @@ function Event(){
         for(let i = 0; i < avaliation.length; i++){
             total = total + avaliation[i].nota
         }
-        const average = (total / avaliation.length).toFixed(1)
+        let average = (total / avaliation.length).toFixed(1)
+        if(avaliation.length === 0){
+            average = 0
+        }
         setAverageRating(average)
         const users = []
         for(let i = 0; i < avaliation.length; i++){
@@ -175,8 +178,8 @@ function Event(){
                             <div className="event-page-category-div">
                                 <div style={{ backgroundColor: 'white', width: '150px', height: '60px', borderRadius: '20px', 
                                 display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                    {category(event.id).icon}
-                                    <p style={{ marginLeft: '10px', fontSize: '22px', color: 'black', fontFamily: 'Lato Bold' }}>{category(event.id).name}</p>
+                                    {category(event.categoria_id).icon}
+                                    <p style={{ marginLeft: '10px', fontSize: '22px', color: 'black', fontFamily: 'Lato Bold' }}>{category(event.categoria_id).name}</p>
                                 </div>
                                 
                             </div>
@@ -256,33 +259,35 @@ function Event(){
                                     <p style={{ fontSize: '22px', marginLeft: '30px' }}>{ratings.length} {ratings.length === 1 ? 'Avaliação' : 'Avaliações'}</p>
                                 </div>
                                 <div id="avaliations-div" style={{ marginTop: '30px', display: 'flex', flexDirection: 'row' }}>
-                                    <div style={{ width: '350px', marginRight: '30px' }}>
-                                        {ratings.map((rating, i) => (
-                                            <div style={{ display: 'flex', flexDirection: 'column', borderBottom: '1px solid white', width: '100%',
-                                            boxSizing: 'border-box', paddingBottom: '8px', marginBottom: '15px' }} key={i}>
-                                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                    <div>
-                                                    <div className="account-divs" id="account-initials" style={{ fontSize: '18px', width: '45px', height: '45px', margin: '0 10px 0 0' }}>
-                                                        {getInitials(rating.user.nome)}
+                                    {ratings.length > 0 ? (
+                                        <div style={{ width: '350px', marginRight: '30px' }}>
+                                            {ratings.map((rating, i) => (
+                                                <div style={{ display: 'flex', flexDirection: 'column', borderBottom: '1px solid white', width: '100%',
+                                                boxSizing: 'border-box', paddingBottom: '8px', marginBottom: '15px' }} key={i}>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                                        <div>
+                                                        <div className="account-divs" id="account-initials" style={{ fontSize: '18px', width: '45px', height: '45px', margin: '0 10px 0 0' }}>
+                                                            {getInitials(rating.user.nome)}
+                                                        </div>
+                                                        </div>
+                                                        <div style={{ display: 'flex', flexDirection: 'column', width: '250px' }}>
+                                                            <p style={{ fontSize: '18px', fontFamily: 'Lato Bold' }}>{rating.user.nome}</p>
+                                                            <p style={{ fontSize: '16px', marginTop: '3px', color: 'lightgray' }}>{new Date(rating.dataAvaliacao).toLocaleDateString()}</p>
+                                                        </div>
+                                                        <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
+                                                            <p style={{ fontSize: '22px', marginRight: '5px' }}>{rating.nota}</p>
+                                                            <FaStar color='#64379b' size='25px' />
+                                                        </div>
                                                     </div>
-                                                    </div>
-                                                    <div style={{ display: 'flex', flexDirection: 'column', width: '250px' }}>
-                                                        <p style={{ fontSize: '18px', fontFamily: 'Lato Bold' }}>{rating.user.nome}</p>
-                                                        <p style={{ fontSize: '16px', marginTop: '3px', color: 'lightgray' }}>{new Date(rating.dataAvaliacao).toLocaleDateString()}</p>
-                                                    </div>
-                                                    <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
-                                                        <p style={{ fontSize: '22px', marginRight: '5px' }}>{rating.nota}</p>
-                                                        <FaStar color='#64379b' size='25px' />
+                                                    
+                                                    <div style={{ marginTop: '10px' }}>
+                                                        <p style={{ fontSize: '18px' }}>{rating.comentario}</p>
                                                     </div>
                                                 </div>
-                                                
-                                                <div style={{ marginTop: '10px' }}>
-                                                    <p style={{ fontSize: '18px' }}>{rating.comentario}</p>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            ))}
                                         
-                                    </div>
+                                        </div>
+                                    ) : null}
                                     {ableToComment ? (
                                         <div style={{ width: '350px', display: 'flex', flexDirection: 'column' }}>
                                             <p style={{ fontSize: '22px' }}>Deixe sua avaliação</p>
