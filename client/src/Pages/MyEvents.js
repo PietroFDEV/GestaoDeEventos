@@ -42,13 +42,14 @@ function MyEvents(){
                 <div className="my-events-grid">
                     {events.map((event, i) => (
                         <a href={`/meu-evento?id=${event.id}`} key={i}>
-                            <div className={event.ativo ? "my-event-div" : "my-event-div-disabled"}>     
-                                <div className='category-circle'>
+                            <div className={event.ativo ? "my-event-div" : "my-event-div-disabled"}>
+                                <div className='category-circle-card'>
                                     {category(event.categoria_id).icon}
                                 </div>
                                 <div className="my-event-info">
-                                    <p className="event-card-title">{event.titulo}</p>
-                                    <p style={{ fontSize: '20px' }}>{new Date(event.data).toLocaleDateString()}</p>
+                                    <p className="event-card-title" style={{ fontFamily: 'Lato Bold' }}>{event.titulo}</p>
+                                    <p style={{ fontSize: '20px', color: 'lightgray' }}>{new Date(event.data).toLocaleDateString()} • {event.hora.slice(0, 5)}</p>
+                                    <p style={{ fontSize: '20px', fontFamily: 'Lato Bold' }}>Preço: {event.preco > 0 ? (`R$ ${event.preco.toFixed(2)}`) : (`Grátis`)}</p>
                                 </div>
                             </div>
                         </a>

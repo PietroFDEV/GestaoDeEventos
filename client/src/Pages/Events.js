@@ -119,12 +119,14 @@ function Events(){
                             {events.map((event, i) => (
                                 <a key={i} href={`/evento?id=${event.id}`}>
                                     <div className="my-event-div">
-                                        <div className='category-circle'>
+                                        <div className='category-circle-card'>
                                             {categoryIcon(event.categoria_id)}
                                         </div>
                                         <div className="my-event-info">
-                                            <p className="event-card-title">{event.titulo}</p>
-                                            <p style={{ fontSize: '20px' }}>{new Date(event.data).toLocaleDateString()}</p>
+                                            <p className="event-card-title" style={{ fontFamily: 'Lato Bold' }}>{event.titulo}</p>
+                                            <p style={{ fontSize: '20px', color: 'lightgray' }}>{new Date(event.data).toLocaleDateString()} • {event.hora.slice(0, 5)}</p>
+                                            <p style={{ fontSize: '20px', fontFamily: 'Lato Bold' }}>Preço: {event.preco > 0 ? (`R$ ${event.preco.toFixed(2)}`) : (`Grátis`)}</p>
+                                            
                                         </div>
                                     </div>
                                 </a>
@@ -133,7 +135,7 @@ function Events(){
                     </div>
                 </div>
                 
-                {isFilterOpen ? (
+                {isFilterOpen && (
                     <div className='background-filters-menu'>
                         <div className="filters-menu">
                             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -195,7 +197,7 @@ function Events(){
 
                         </div>
                     </div>
-                ) : (null)}
+                )}
             </div>
         )
     }

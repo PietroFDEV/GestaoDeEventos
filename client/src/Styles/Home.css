@@ -114,7 +114,7 @@
 
 .events-home-grid{
     display: inline-grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(auto-fill, 1fr);
     row-gap: 30px;
     column-gap: 30px;
