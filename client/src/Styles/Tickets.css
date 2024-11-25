@@ -1,0 +1,40 @@
+.ticket-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(auto-fill, 1fr);
+    row-gap: 30px;
+    column-gap: 30px;
+    margin-top: 10px;
+}
+
+.ticket-div{
+    background-color: #64379b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 250px;
+    height: 150px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.ticket-div-disabled{
+    background-color: #8c809b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 250px;
+    height: 150px;
+    cursor: pointer;
+    transition: 0.2s;
+}
