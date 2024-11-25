@@ -47,7 +47,7 @@ function MyEvents(){
                                     {category(event.categoria_id).icon}
                                 </div>
                                 <div className="my-event-info">
-                                    <p className="event-card-title" style={{ fontFamily: 'Lato Bold' }}>{event.titulo}</p>
+                                    <p className="event-card-title" style={{ fontFamily: 'Lato Bold' }}>{event.titulo} {!event.ativo && ' - Finalizado'}</p>
                                     <p style={{ fontSize: '20px', color: 'lightgray' }}>{new Date(event.data).toLocaleDateString()} • {event.hora.slice(0, 5)}</p>
                                     <p style={{ fontSize: '20px', fontFamily: 'Lato Bold' }}>Preço: {event.preco > 0 ? (`R$ ${event.preco.toFixed(2)}`) : (`Grátis`)}</p>
                                 </div>

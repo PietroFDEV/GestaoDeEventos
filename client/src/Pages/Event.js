@@ -91,10 +91,10 @@ function Event(){
         }
 
         const mergedRatings = avaliation.map(rating => {
-            const user = users.find(user => user.id === rating.usuarioId);
+            const user = users.find(user => user.id === rating.usuarioId)
             return {
               ...rating,
-              user: user || null, // Add the user or null if not found
+              user: user || null,
             }
         })
 

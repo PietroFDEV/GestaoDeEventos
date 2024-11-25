@@ -133,9 +133,9 @@
     align-items: center;
     width: 100%;
     margin: auto;
-  }
+}
 
-  input[type="range"] {
+input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
@@ -145,23 +145,23 @@
     outline: none;
     overflow: hidden;
     transition: 1s;
-  }
+}
 
-  input[type="range"]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 10px;
     background: transparent;
     border-radius: 5px;
-  }
+}
 
-  input[type="range"]::-moz-range-track {
+input[type="range"]::-moz-range-track {
     width: 100%;
     height: 10px;
     background: transparent;
     border-radius: 5px;
-  }
+}
 
-  input[type="range"]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 20px;
@@ -170,13 +170,66 @@
     cursor: pointer;
     position: relative;
     z-index: 1;
-  }
+}
 
-  input[type="range"]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
     width: 20px;
     height: 10px;
     border-radius: 3px;
     cursor: pointer;
     position: relative;
     z-index: 1;
-  }
+}
+
+.my-event-tickets-modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.534);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-container{
+    background-color: #17181e;
+    width: 70%;
+    height: 80vh;
+    border: 0;
+    border-radius: 10px;
+    color: white;
+    box-sizing: border-box;
+    padding: 20px 50px;
+}
+
+.modal-top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.modal-ticket-header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+    justify-content: space-evenly;
+}
+
+.modal-ticket{
+    margin-top: 5px;
+    border-bottom: 1px solid white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 5px;
+    justify-content: space-evenly;
+}

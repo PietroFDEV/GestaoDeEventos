@@ -43,6 +43,9 @@ function Events(){
     async function filterEvents(params) {
         const response = await api.get(`/Evento/ListEvents`)
         let eventos = response.data
+
+        eventos = eventos.filter(e => e.ativo)
+        
         if(params.search){
             eventos = eventos.filter(e => e.titulo.toLowerCase().includes(params.search.toLowerCase()))
         }

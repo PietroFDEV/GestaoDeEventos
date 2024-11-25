@@ -12,8 +12,10 @@ function MyEvent(){
     const [event, setEvent] = useState({})
     const [verify, setVerify] = useState(false)
     const [tickets, setTickets] = useState([])
+    const [soldValue, setSoldValue] = useState(0.00)
     const [avaliations, setAvaliations] = useState([])
     const [averageRating, setAverageRating] = useState()
+    const [isModalActive, setIsModalActive] = useState(false)
 
     const useQuery = () => new URLSearchParams(useLocation().search)
     const query = useQuery()
@@ -41,7 +43,25 @@ function MyEvent(){
 
     async function loadTickets(eventoId){
         const response = await api.get(`/Ticket/EventId/${eventoId}`)
-        setTickets(response.data)
+        const ticks = response.data
+        const users = []
+        let totalValue = 0.00
+        for(let i = 0; i < ticks.length; i++){
+            const res = await api.get(`/Usuario/${ticks[i].usuarioId}`)
+            users.push(res.data)
+            totalValue = totalValue + ticks[i].preco
+        }
+
+        const mergedTickets = ticks.map(t => {
+            const user = users.find(user => user.id === t.usuarioId)
+            return {
+              ...t,
+              user: user || null,
+            }
+        })
+
+        setTickets(mergedTickets)
+        setSoldValue(totalValue)
         return response.data
     }
 
@@ -155,9 +175,7 @@ function MyEvent(){
                                 </div>
                             </div>
                             <div className="tickets-sold-bottom" style={{ width: '100%' }}>
-                                <a href='#'>
-                                    <p style={{ color: 'lightgray', fontSize: '20px' }}>Ver tickets</p>
-                                </a>
+                                <p style={{ color: 'lightgray', fontSize: '20px', cursor: 'pointer' }} onClick={() => setIsModalActive(true)}>Ver tickets vendidos</p>
                             </div>
                         </div>
                         {event.ativo ? (
@@ -178,13 +196,57 @@ function MyEvent(){
                         
                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
                                     <p>{avaliations.length} {avaliations.length === 1 ? 'Avaliação' : 'Avaliações'}</p>
-                                    <a>
+                                    <a href={`/evento?id=${event.id}#tickets-div`}>
                                         <p style={{ fontSize: '20px', marginLeft: '10px', color: 'lightgray', cursor: 'pointer', marginBottom: '1px' }}>Ver avaliações</p>
                                     </a>
                                 </div>
                             </div>
                         )}
                     </div>
+
+                    {isModalActive && (
+                        <div className="my-event-tickets-modal">
+                            <div className="modal-container">
+                                <div className="modal-top">
+                                    <p style={{ fontSize: '24px' }}>Relação de tickets vendidos</p>
+                                    <p style={{ fontSize: '20px' }}>Valor total vendido: R$ {soldValue.toFixed(2).replace('.',',')}</p>
+                                    <button className="close-button" onClick={() => setIsModalActive(false)} style={{ fontSize: '40px' }}>&times;</button>
+                                </div>
+
+                                <div className="tickets-container" style={{ height: '90%', overflowY: 'auto' }}>
+                                    <div className="modal-ticket-header">
+                                        <p style={{ width: '15%', fontSize: '20px', textAlign: 'center' }}>Nº Ticket</p>
+                                        <p style={{ width: '25%', fontSize: '20px' }}>Nome do comprador</p>
+                                        <p style={{ width: '25%', fontSize: '20px' }}>E-mail do comprador</p>
+                                        <p style={{ width: '15%', fontSize: '20px', textAlign: 'center' }}>Valor pago</p>
+                                        <p style={{ width: '20%', fontSize: '20px', textAlign: 'center' }}>Data da compra</p>
+                                    </div>
+                                    <div style={{ marginTop: '0px' }}>
+                                        {tickets.map((ticket, i) => (
+                                            <div className="modal-ticket" key={i}>
+                                                <div style={{ width: '15%', textAlign: 'center' }}>
+                                                    <p style={{ fontSize: '18px' }}>{ticket.id}</p>
+                                                </div>
+                                                <div style={{ width: '25%' }}>
+                                                    <p style={{ fontSize: '18px' }}>{ticket.user.nome}</p>
+                                                </div>
+                                                <div style={{ width: '25%' }}>
+                                                    <p style={{ fontSize: '18px' }}>{ticket.user.email}</p>
+                                                </div>
+                                                <div style={{ width: '15%', textAlign: 'center' }}>
+                                                    <p style={{ fontSize: '18px' }}>R$ {ticket.preco.toFixed(2).replace('.',',')}</p>
+                                                </div>
+                                                <div style={{ width: '20%', textAlign: 'center' }}>
+                                                    <p style={{ fontSize: '18px' }}>{new Date(ticket.dataCompra).toLocaleDateString()}</p>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
             ) : (
